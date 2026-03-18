@@ -1,175 +1,162 @@
-1. Naming
+Here’s your content structured into a clean, professional document format:
 
-Names should clearly express their purpose, be easy to say, and easy to search.
+---
 
-Avoid:
+# Coding Guidelines
 
-Shortened forms, prefixes, or unnecessary filler words
+## 1. Naming
 
-Cryptic or encoded naming styles
+* Names must be clear, meaningful, and easy to pronounce and search.
+* Avoid abbreviations, prefixes, encodings, and unnecessary filler words.
+* Use single-letter variables only for short loops (`i`, `j`, `k`).
 
-Use single-letter names only for simple loop counters like i, j, or k.
+### Naming Conventions
 
-Follow consistent naming styles:
+* **Classes & Files:** UpperCamelCase
+* **Methods, Variables, Fields, Parameters:** lowerCamelCase
+* **Constants:** UPPER_SNAKE_CASE
+* **Packages:** lowercase
 
-Classes and files → UpperCamelCase
+### Best Practices
 
-Methods, variables, fields, parameters → lowerCamelCase
+* Avoid names that differ only slightly.
+* Use one consistent term per concept (e.g., always use `get`, not mix with `fetch` or `retrieve`).
 
-Constants → UPPER_SNAKE_CASE
+---
 
-Packages → lowercase
+## 2. Functions
 
-Do not use names that are too similar to each other.
-Choose one term per concept and stick to it consistently (e.g., use only “get” instead of mixing “fetch” or “retrieve”).
+* Keep functions small (preferably under 20 lines).
+* Each function should perform only one task.
+* Maintain a single level of abstraction per function.
 
-2. Functions
+### Guidelines
 
-Functions should be small (preferably under 20 lines) and focused on a single task.
+* Use descriptive, meaningful names.
+* Minimize parameters:
 
-Guidelines:
+  * Prefer no parameters.
+  * If more than 2–3 are needed, use an object.
+* Avoid boolean parameters; split into separate methods.
+* Avoid side effects.
+* Follow the **DRY (Don't Repeat Yourself)** principle.
 
-Each function should operate at one level of abstraction
+---
 
-Prefer clear, descriptive names over short ones
+## 3. Comments
 
-Keep parameters minimal (ideally none; if many are needed, wrap them in an object)
+* Prefer self-explanatory code over comments.
 
-Avoid boolean parameters — create separate functions instead
+### Acceptable Uses
 
-Prevent hidden side effects; functions should behave exactly as their names suggest
+* Legal/license information
+* Clarifying intent or complex logic
+* Warnings and important notes
+* TODOs
+* Public API documentation
 
-Eliminate duplication by following the DRY principle
+### Avoid
 
-3. Comments
+* Redundant or obvious comments
 
-Rely on clean, readable code instead of comments whenever possible.
+* Change logs or history comments
 
-Use comments only when necessary, such as:
+* Commented-out code
 
-Legal or license information
+* Closing-brace comments
 
-Explaining intent or non-obvious decisions
+* Always place comments **above** the code they describe.
 
-Warnings or important notes
+---
 
-TODOs
+## 4. Formatting
 
-Documentation for public APIs
+### Vertical Formatting
 
-Avoid:
+* Use blank lines to separate logical sections.
+* Keep related code together.
+* Separate unrelated code clearly.
+* Follow the **Stepdown Rule** (caller methods above called methods).
+* Keep files under 500 lines.
+* End each file with exactly one newline.
 
-Obvious or repetitive comments
+### Horizontal Formatting
 
-Change history logs
+* Limit lines to 120 characters.
+* Use one tab per indentation level.
+* Add spaces around operators: `a = b + c`
+* No space before method parentheses: `runTask()`
+* Always use braces `{}` for all control statements.
 
-Commented-out code
+---
 
-Labels for closing braces or positions
+## 5. Classes
 
-Place comments above the code they describe.
+* One top-level class per file.
+* File name must match the class name.
 
-4. Formatting
-Vertical Formatting
+### Principles
 
-Use blank lines to separate logical sections
+* Each class should have a single responsibility.
+* Keep fields private.
+* Expose behavior via methods, not raw data.
+* Ensure high cohesion.
 
-Keep related code close together
+### Member Order
 
-Separate unrelated code clearly
+1. Constants
+2. Static fields
+3. Instance fields
+4. Constructors
+5. Public methods
+6. Private methods
 
-Follow the Stepdown Rule: higher-level methods should appear before the ones they call
+---
 
-Keep files under 500 lines
+## 6. Error Handling
 
-End each file with exactly one newline
+* Use exceptions instead of return codes.
+* Provide meaningful error messages.
+* Do not return `null`:
 
-Horizontal Formatting
+  * Use empty collections or `Optional`.
+* Avoid passing `null` unless required.
+* Prefer unchecked exceptions.
 
-Limit lines to 120 characters
+---
 
-Use one tab per indentation level
+## 7. Objects vs Data Structures
 
-Add spaces around operators (a = b + c)
+* **Objects:** Hide data, expose behavior.
 
-Do not add spaces before method parentheses (runTask(), not runTask ())
+* **Data Structures:** Expose data, no behavior.
 
-Always include braces {} even for single-line blocks
+* Avoid mixing both roles.
 
-5. Classes
+### Law of Demeter
 
-Each file should contain only one top-level class, and the file name must match the class name.
+* A method should only interact with its immediate dependencies.
 
-Class design principles:
+---
 
-A class should have a single responsibility
+## 8. SOLID Principles
 
-Keep fields private and expose behavior through methods
+* **Single Responsibility:** One reason to change per class
+* **Open/Closed:** Extend without modifying existing code
+* **Liskov Substitution:** Subtypes must replace base types safely
+* **Interface Segregation:** Prefer small, focused interfaces
+* **Dependency Inversion:** Depend on abstractions, not implementations
 
-Aim for high cohesion (methods should use the class’s data)
+---
 
-Member order:
+## 9. Code Smells to Eliminate
 
-Constants
+* Remove dead code (don’t comment it out).
+* Replace magic numbers with named constants.
+* Fix feature envy (move logic to the right class).
+* Avoid primitive obsession (use domain objects).
+* Reduce long parameter lists (use objects).
+* Prevent scattered changes (maintain proper responsibilities).
+* Avoid tight coupling between classes.
 
-Static fields
 
-Instance fields
-
-Constructors
-
-Public methods
-
-Private methods
-
-6. Error Handling
-
-Use exceptions instead of return codes
-
-Include helpful, meaningful error messages
-
-Avoid returning null; use empty collections or Optional instead
-
-Do not pass null unless absolutely required by an API
-
-Prefer unchecked exceptions to keep APIs clean
-
-7. Objects vs Data Structures
-
-Objects should encapsulate data and expose behavior
-
-Data structures should expose data without behavior
-
-Avoid mixing these roles
-
-Follow the Law of Demeter:
-
-A method should only interact with its direct collaborators, not deeply nested objects
-
-8. SOLID Principles
-
-Single Responsibility: A class should have only one reason to change
-
-Open/Closed: Extend behavior without modifying existing code
-
-Liskov Substitution: Subtypes must work seamlessly in place of base types
-
-Interface Segregation: Prefer multiple focused interfaces over one large one
-
-Dependency Inversion: Depend on abstractions, not concrete implementations
-
-9. Code Smells to Avoid
-
-Remove unused (dead) code completely
-
-Replace hardcoded values with named constants
-
-Move logic to the class where it belongs (avoid feature envy)
-
-Replace primitive types with meaningful domain objects when possible
-
-Avoid long parameter lists — use objects instead
-
-Prevent scattered changes across multiple classes by keeping responsibilities well-defined
-
-Avoid tight coupling where classes access each other’s internal details
