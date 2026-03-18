@@ -1,6 +1,3 @@
-Here’s your content structured into a clean, professional document format:
-
----
 
 # Coding Guidelines
 
