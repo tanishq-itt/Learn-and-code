@@ -9,9 +9,9 @@
 
 ### Naming Conventions
 
-* **Classes & Files:** UpperCamelCase
+* **Classes & Files:** UPPER_SNAKE_CASE
 * **Methods, Variables, Fields, Parameters:** lowerCamelCase
-* **Constants:** UPPER_SNAKE_CASE
+* **Constants:** UPPER_SNAKE_CASE, UpperCamelCase
 * **Packages:** lowercase
 
 ### Best Practices
