@@ -1,0 +1,9 @@
+class Customer:
+    def __init__(self, first_name, last_name, wallet):
+        self._first_name = first_name
+        self._last_name = last_name
+        self._wallet = wallet
+
+    def pay(self, amount):
+
+        return self._wallet.withdraw(amount)
