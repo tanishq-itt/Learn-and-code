@@ -1,0 +1,32 @@
+What I found about using try-finally without except is that it is useful when we
+don’t want to handle the error at that stage in the data pipeline, but we must
+ensure cleanup or state consistency before letting the error propagate to orchestration
+layers (like Airflow, Databricks jobs, etc.).
+
+• Data Pipeline Resource Management:
+  Ensures resources like Spark sessions, file handles, or DB connections are always
+  closed, even if a job fails, while allowing the error to propagate.
+
+• Spark Job Cleanup:
+  Ensures temporary views, cached DataFrames, or broadcast variables are cleared/
+  unpersisted to avoid memory issues, even if transformations fail.
+
+• Checkpoint / Intermediate Data Handling:
+  Cleans up staging or temporary data (parquet/csv) to prevent duplication or storage
+  issues, even if the pipeline fails midway.
+
+• Lock Handling in Distributed Systems:
+  Ensures locks or metadata flags are always released, preventing duplicate or stuck
+  processing in distributed jobs.
+
+• ETL State Consistency:
+  Ensures audit/status tables are updated correctly (e.g., in-progress → failed),
+  even if the transformation logic fails.
+
+• Streaming / Incremental Processing Cleanup:
+  Ensures checkpoints, offsets, or temp states are handled properly in streaming jobs,
+  even if a batch fails.
+
+• Error Propagation to Orchestrators:
+  Used when the pipeline step should not handle errors, but must clean up before
+  passing the failure to tools like Airflow for retries/alerts
